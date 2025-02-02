@@ -1,0 +1,12 @@
+name: SkyDonatePlugin
+version: '2.0'
+main: wtf.n1zamu.SkyDonatePlugin
+description: "Плагин для автоматической выдачи доната!"
+api-version: '1.16'
+author: "github.com/n1zamu"
+load: STARTUP
+commands:
+  skydonate:
+    aliases:
+      - skydonate
+    permission: skydonate.admin
