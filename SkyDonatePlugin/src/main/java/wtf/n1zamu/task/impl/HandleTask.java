@@ -15,7 +15,12 @@ public class HandleTask implements ITask {
             @Override
             public void run() {
                 getPurchases().forEach(purchase -> {
-                    purchase.getUsedCommands().forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
+                    for (int i = 0; i < purchase.getUsedCommands().size(); i++) {
+                        if (isDebugged()) {
+                            Bukkit.getLogger().info("[SkyDonate] Использую команду номер " + i + ": " + purchase.getUsedCommands().get(i));
+                        }
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), purchase.getUsedCommands().get(i));
+                    }
                     if (isDebugged()) {
                         Bukkit.getLogger().info("[SkyDonate] Выдана покупка для игрока: " + purchase.getUsername());
                     }

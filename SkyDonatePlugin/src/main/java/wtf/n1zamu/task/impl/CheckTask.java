@@ -93,16 +93,19 @@ public class CheckTask implements ITask {
                         }
                         List<String> commandsToExecute = value.stream()
                                 .map(line -> {
-                                    String finalLine = line.replace("{player}", username);
+                                    Map<String, String> placeholders = new HashMap<>();
+                                    placeholders.put("{player}", username);
                                     if (finalStorage != null) {
-                                        Map<String, String> placeholders = new HashMap<>();
                                         for (Object stKey : finalStorage.keySet()) {
                                             placeholders.put("{" + stKey + "}", finalStorage.get(stKey.toString()).toString());
-                                            purchase.setPlaceholders(placeholders);
-                                            finalLine = finalLine.replace("{" + stKey + "}", finalStorage.get(stKey.toString()).toString());
                                         }
                                     }
-                                    return finalLine;
+                                    purchase.setPlaceholders(placeholders);
+                                    for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                                        line = line.replace(entry.getKey(), entry.getValue());
+                                    }
+                                    Bukkit.getLogger().info(line);
+                                    return line;
                                 })
                                 .collect(Collectors.toList());
                         purchase.setUsedCommands(commandsToExecute);
