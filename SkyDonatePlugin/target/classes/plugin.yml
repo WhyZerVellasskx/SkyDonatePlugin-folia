@@ -1,9 +1,10 @@
 name: SkyDonatePlugin
-version: '2.0'
+version: '2.0.3'
 main: wtf.n1zamu.SkyDonatePlugin
 description: "Плагин для автоматической выдачи доната!"
 api-version: '1.16'
-author: "github.com/n1zamu"
+author: "github.com/n1zamu, WhyZerVellasskx"
+folia-supported: true
 load: STARTUP
 commands:
   skydonate:

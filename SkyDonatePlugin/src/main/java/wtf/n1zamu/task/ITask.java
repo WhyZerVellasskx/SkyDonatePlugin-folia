@@ -3,9 +3,6 @@ package wtf.n1zamu.task;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
-import org.bukkit.Bukkit;
-
-import org.bukkit.plugin.Plugin;
 import wtf.n1zamu.SkyDonatePlugin;
 import wtf.n1zamu.api.dto.Purchase;
 
@@ -28,12 +25,12 @@ public interface ITask {
         return updateCache;
     }
 
-    default void startTaskAsynchronously(Plugin plugin) {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this.getTask(), 0, 210);
+    default void startTaskAsynchronously() {
+        TaskExecutor.runTaskTimerAsync(this.getTask(), 0, 210);
     }
 
-    default void startTask(Plugin plugin) {
-        Bukkit.getScheduler().runTaskTimer(plugin, this.getTask(), 0, 10);
+    default void startTask() {
+        TaskExecutor.runTaskTimer(this.getTask(), 0, 10);
     }
 
     default boolean isDebugged() {
